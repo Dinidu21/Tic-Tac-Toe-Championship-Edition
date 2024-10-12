@@ -1,0 +1,47 @@
+/* General Grid Styling */
+#gameBoard {
+    -fx-background-color: #fff;
+    -fx-border-color: #333;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 30, 0.5, 0, 0);
+}
+
+.grid-cell {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: #333;
+    -fx-border-width: 1px;
+    -fx-alignment: center;
+    -fx-font-size: 36px;
+    -fx-text-fill: #333;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+.grid-cell:hover {
+    -fx-background-color: #d1e8e2;
+    -fx-cursor: hand;
+}
+
+.grid-cell:pressed {
+    -fx-background-color: #ff318c;
+}
+
+/* Winning Styles */
+.winning-cell {
+    -fx-background-color: #ff318c;
+    -fx-text-fill: white;
+    -fx-border-width: 2px;
+    -fx-border-color: #333;
+}
+
+/* Status Message Styling */
+.status-label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-text-fill: #5734b4;
+    -fx-background-color: #e7e7e7;
+    -fx-padding: 5px;
+    -fx-alignment: center;
+    -fx-border-color: #5734b4;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
