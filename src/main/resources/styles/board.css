@@ -12,7 +12,7 @@
 }
 
 .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 16px; /* Ensure this applies to all labels */
     -fx-text-fill: #5734b4;
 }
 
@@ -20,7 +20,7 @@
     -fx-background-color: #5734b4;
     -fx-text-fill: white;
     -fx-border-radius: 5px;
-    -fx-font-size: 16px;
+    -fx-font-size: 16px; /* Adjusted font size for buttons */
     -fx-padding: 10px 20px;
     -fx-cursor: hand;
 }
@@ -29,7 +29,7 @@
     -fx-background-color: #f0f0f0;
     -fx-border-color: #5734b4;
     -fx-border-radius: 10px;
-    -fx-font-size: 48px;
+    -fx-font-size: 64px; /* Ensure button font size is specifically set */
     -fx-text-fill: #5734b4;
     -fx-min-width: 100px;
     -fx-min-height: 100px;
@@ -53,7 +53,7 @@
 }
 
 .status-label {
-    -fx-font-size: 18px;
+    -fx-font-size: 18px; /* Ensure font size is specified */
     -fx-text-fill: #5734b4;
     -fx-background-color: rgba(231, 231, 231, 0.8);
     -fx-padding: 10px;
@@ -69,6 +69,7 @@
     -fx-background-color: #ffffff;
     -fx-border-color: #5734b4;
     -fx-border-radius: 5px;
+    -fx-font-size: 14px; /* Set font size for ComboBox */
 }
 
 .combo-box:hover {
@@ -80,18 +81,19 @@
     -fx-border-color: #5734b4;
     -fx-border-radius: 5px;
     -fx-padding: 5px;
+    -fx-font-size: 14px; /* Set font size for TextField */
 }
 
 .text-field:focused {
     -fx-border-color: #ff318c;
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 0); /* Corrected inner-shadow to innershadow */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 0);
 }
 
 .custom-button {
     -fx-background-color: #5734b4;
     -fx-text-fill: white;
     -fx-border-radius: 5px;
-    -fx-font-size: 16px;
+    -fx-font-size: 16px; /* Set custom font size for custom button */
     -fx-padding: 10px 20px;
     -fx-cursor: hand;
 }

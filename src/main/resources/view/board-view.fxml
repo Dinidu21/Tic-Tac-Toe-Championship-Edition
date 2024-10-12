@@ -29,7 +29,7 @@
         </Label>
 
         <!-- Start Game Button -->
-        <Button fx:id="startGameButton" layoutX="312.0" layoutY="23.0" onAction="#startGame" style="-fx-background-radius: 20;" styleClass="custom-button" text="Start Game" />
+        <Button fx:id="startGameButton" layoutX="312.0" layoutY="23.0" onAction="#startGame" style="-fx-background-radius: 20; -fx-font-size: 16px; -fx-background-color: #5734b4; -fx-text-fill: white;" styleClass="custom-button" text="Start Game" />
 
         <!-- Game Board Grid -->
         <GridPane fx:id="gameBoard" gridLinesVisible="true" layoutX="25.0" layoutY="150.0" prefHeight="394.0" prefWidth="400.0" style="-fx-background-color: #fafafa; -fx-border-color: #333333; -fx-border-width: 2;">
@@ -43,16 +43,17 @@
                 <RowConstraints minHeight="100.0" prefHeight="130.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="100.0" prefHeight="130.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <!-- Adding Buttons for Tic Tac Toe -->
-            <Button fx:id="button00" onAction="#handleButtonClick" prefHeight="130.0" prefWidth="131.0" styleClass="game-button" />
-            <Button fx:id="button22" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="144.0" styleClass="game-button" GridPane.rowIndex="1" />
-            <Button fx:id="button20" onAction="#handleButtonClick" prefHeight="149.0" prefWidth="194.0" styleClass="game-button" GridPane.rowIndex="2" />
-            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="166.0" prefWidth="162.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="button02" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="142.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="button10" onAction="#handleButtonClick" prefHeight="138.0" prefWidth="144.0" styleClass="game-button" GridPane.columnIndex="2" />
-            <Button fx:id="button11" onAction="#handleButtonClick" prefHeight="146.0" prefWidth="145.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="button12" onAction="#handleButtonClick" prefHeight="144.0" prefWidth="177.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="button21" onAction="#handleButtonClick" prefHeight="134.0" prefWidth="138.0" styleClass="game-button" GridPane.columnIndex="1" />
+
+            <!-- Adding Buttons for Tic Tac Toe with Inline Styles -->
+            <Button fx:id="button00" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button fx:id="button02" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Button fx:id="button10" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button fx:id="button11" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="button12" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="button20" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Button fx:id="button21" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="button22" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" style="-fx-font-size: 64px; -fx-background-color: #f0f0f0; -fx-border-color: #5734b4; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         </GridPane>
     </children>
 </AnchorPane>
