@@ -1,47 +1,82 @@
-/* General Grid Styling */
+* {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
+}
+
 #gameBoard {
-    -fx-background-color: #fff;
-    -fx-border-color: #333;
-    -fx-border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 30, 0.5, 0, 0);
+    -fx-background-color: #ffffff;
+    -fx-border-color: #5734b4;
+    -fx-border-width: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-padding: 10px;
 }
 
-.grid-cell {
-    -fx-background-color: #f7f7f7;
-    -fx-border-color: #333;
-    -fx-border-width: 1px;
-    -fx-alignment: center;
-    -fx-font-size: 36px;
-    -fx-text-fill: #333;
-    -fx-font-family: 'Arial', sans-serif;
-}
-
-.grid-cell:hover {
-    -fx-background-color: #d1e8e2;
+.game-button {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #5734b4;
+    -fx-border-radius: 10px;
+    -fx-font-size: 48px;
+    -fx-text-fill: #5734b4;
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
     -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease-in-out;
 }
 
-.grid-cell:pressed {
+.game-button:hover {
     -fx-background-color: #ff318c;
+    -fx-text-fill: white;
 }
 
-/* Winning Styles */
 .winning-cell {
     -fx-background-color: #ff318c;
     -fx-text-fill: white;
     -fx-border-width: 2px;
-    -fx-border-color: #333;
+    -fx-border-color: #fff;
+    -fx-effect: dropshadow(gaussian, rgba(255, 50, 140, 0.5), 10, 0.5, 0, 0); /
 }
 
-/* Status Message Styling */
 .status-label {
-    -fx-font-size: 16px;
-    -fx-font-family: 'Arial', sans-serif;
+    -fx-font-size: 18px;
     -fx-text-fill: #5734b4;
-    -fx-background-color: #e7e7e7;
-    -fx-padding: 5px;
+    -fx-background-color: rgba(231, 231, 231, 0.8);
+    -fx-padding: 10px;
     -fx-alignment: center;
     -fx-border-color: #5734b4;
-    -fx-border-width: 1px;
+    -fx-border-width: 2px;
     -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0);
+    -fx-opacity: 0.95;
+}
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #5734b4;
+    -fx-border-radius: 5px;
+}
+
+.combo-box:hover {
+    -fx-border-color: #ff318c;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #5734b4;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.text-field:focused {
+    -fx-border-color: #ff318c;
+    -fx-effect: inner-shadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 0);
+}
+
+
+.button {
+    -fx-transition: background-color 0.2s, scale 0.2s;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

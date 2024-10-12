@@ -18,5 +18,6 @@ public class HumanPlayer extends Player implements Serializable {
 
     @Override
     public void move(int row, int col) {
+
     }
 }

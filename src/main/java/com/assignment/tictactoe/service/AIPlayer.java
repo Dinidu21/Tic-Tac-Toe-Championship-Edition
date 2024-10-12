@@ -5,20 +5,21 @@ import lombok.Setter;
 
 import java.util.Random;
 import java.io.Serializable;
+
 @Getter
 @Setter
-
 public class AIPlayer extends Player implements Serializable {
     private Random random;
-    private Board board;
+    private Piece selectedPiece;
 
-    public AIPlayer(Board board) {
+    public AIPlayer(Board board, Piece selectedPiece) {
         super(board);
         this.random = new Random();
+        this.selectedPiece = selectedPiece;
     }
 
     @Override
-    void move(int row, int col) {
+    public void move(int row, int col) {
 
     }
 }
