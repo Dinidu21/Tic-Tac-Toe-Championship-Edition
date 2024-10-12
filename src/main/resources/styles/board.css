@@ -1,8 +1,4 @@
-* {
-    -fx-font-family: 'Poppins', sans-serif;
-    -fx-font-size: 14px;
-}
-
+/*grid*/
 #gameBoard {
     -fx-background-color: #ffffff;
     -fx-border-color: #5734b4;
@@ -11,12 +7,9 @@
     -fx-padding: 10px;
 }
 
-.label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #5734b4;
-}
-
+/*start game btn*/
 .custom-button {
+    -fx-font-family: 'Poppins';
     -fx-background-color: #5734b4;
     -fx-text-fill: white;
     -fx-border-radius: 5px;
@@ -24,77 +17,97 @@
     -fx-padding: 10px 20px;
     -fx-cursor: hand;
 }
-
 .custom-button:hover {
     -fx-background-color: #ff318c;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
-
 .custom-button:pressed {
     -fx-background-color: #ff2050;
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;
 }
 
-.game-button {
-    -fx-background-color: #f0f0f0;
-    -fx-border-color: #5734b4;
-    -fx-border-radius: 10px;
-    -fx-font-size: 64px;
-    -fx-text-fill: #d8a3d6;
-    -fx-min-width: 100px;
-    -fx-min-height: 100px;
-    -fx-cursor: hand;
-    -fx-transition: background-color 0.3s ease-in-out, scale 0.3s;
+/* Style for labels */
+.player-label {
+    -fx-font-family: 'Poppins'; /* Specific font for labels */
+    -fx-font-size: 14px; /* Font size for labels */
+    -fx-text-fill: #5734b4; /* Adjust color as needed */
+    -fx-padding: 5px; /* Optional padding for spacing */
 }
 
-.game-button:hover {
-    -fx-background-color: #ff318c;
-    -fx-text-fill: #d8a3d6; /* Maintain light purple text color on hover */
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+/* Style for text fields */
+.text-field {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #5734b4; /* Purple border */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px; /* Padding for text */
+    -fx-font-family: 'Poppins'; /* Specific font for text fields */
+    -fx-font-size: 14px; /* Font size for text fields */
 }
 
-.winning-cell {
-    -fx-background-color: #ff318c;
-    -fx-text-fill: pink;
-    -fx-border-width: 2px;
-    -fx-border-color: #fff;
-    -fx-effect: dropshadow(gaussian, rgba(255, 50, 140, 0.5), 10, 0.5, 0, 0);
+.text-field:focused {
+    -fx-border-color: #ff318c; /* Change border color on focus */
+    -fx-effect: innershadow(gaussian, rgba(255, 50, 140, 0.5), 3, 0.5, 0, 0);
 }
 
-.status-label {
-    -fx-font-size: 18px;
-    -fx-text-fill: #5734b4;
-    -fx-background-color: rgba(231, 231, 231, 0.8);
-    -fx-padding: 10px;
-    -fx-alignment: center;
-    -fx-border-color: #5734b4;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0);
-    -fx-opacity: 0.95;
-}
-
+/* Style for combo box */
 .combo-box {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #5734b4;
-    -fx-border-radius: 5px;
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #5734b4; /* Purple border */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-font-family: 'Poppins'; /* Specific font for combo box */
+    -fx-font-size: 14px; /* Font size for combo box */
 }
 
 .combo-box:hover {
     -fx-border-color: #ff318c;
 }
 
-.text-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #5734b4;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
+/* Style for status label */
+.status-label {
+    -fx-font-family: 'Poppins'; /* Specific font for status label */
+    -fx-font-size: 18px; /* Larger font size for status messages */
+    -fx-text-fill: #5734b4; /* Purple text color */
+    -fx-background-color: rgba(231, 231, 231, 0.8); /* Light gray background */
+    -fx-padding: 10px; /* Padding for content */
+    -fx-alignment: center; /* Center alignment */
+    -fx-border-color: #5734b4; /* Purple border */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0); /* Shadow effect */
+    -fx-opacity: 0.95; /* Slightly transparent */
 }
 
-.text-field:focused {
-    -fx-border-color: #ff318c;
-    -fx-effect: innershadow(gaussian, rgba(255, 50, 140, 0.5), 3, 0.5, 0, 0);
+/* General game button styling */
+.game-button {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-border-color: #5734b4;     /* Purple border */
+    -fx-border-radius: 10px;       /* Rounded corners */
+    -fx-font-size: 48px;           /* Large text */
+    -fx-text-fill: #d8a3d6;        /* Light purple text color */
+    -fx-min-width: 120px;          /* Minimum width */
+    -fx-min-height: 120px;         /* Minimum height */
+    -fx-cursor: hand;              /* Pointer cursor on hover */
+    -fx-transition: background-color 0.3s ease-in-out, scale 0.3s; /* Smooth transition for background and scaling */
 }
+
+/* Hover effect for buttons */
+.game-button:hover {
+    -fx-background-color: #ff318c; /* Pink background on hover */
+    -fx-text-fill: #d8a3d6;        /* Maintain light purple text color on hover */
+    -fx-scale-x: 1.05;             /* Slight scale up on hover */
+    -fx-scale-y: 1.05;             /* Slight scale up on hover */
+}
+
+/* Pressed effect for buttons */
+.game-button:pressed {
+    -fx-background-color: #d8a3d6; /* Change to light purple background on click */
+    -fx-text-fill: #5734b4;        /* Change text color to purple on click */
+    -fx-font-weight: bold;         /* Make text bold */
+    -fx-scale-x: 0.95;             /* Scale down slightly on press */
+    -fx-scale-y: 0.95;             /* Scale down slightly on press */
+    -fx-opacity: 0.5;              /* Fade the text on press */
+}
+
+
