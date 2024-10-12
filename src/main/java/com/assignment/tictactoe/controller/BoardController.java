@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 public class BoardController {
+    public Button startGameButton;
     @FXML
     private TextField playerNameField;
     @FXML
@@ -68,12 +69,12 @@ public class BoardController {
         HumanPlayer humanPlayer = new HumanPlayer(board, playerName, selectedPiece);
         AIPlayer aiPlayer = new AIPlayer(board, Piece.O);
         statusMessage.setText(playerName + " vs AI - Game Started!");
+        startGameButton.setDisable(true);
+
     }
 
     @FXML
     public void handleButtonClick(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        int row = GridPane.getRowIndex(button);
-        int col = GridPane.getColumnIndex(button);
+
     }
 }
