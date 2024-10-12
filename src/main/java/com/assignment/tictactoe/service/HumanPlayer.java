@@ -8,17 +8,15 @@ import java.io.Serializable;
 @Setter
 public class HumanPlayer extends Player implements Serializable {
     private String name;
+    private Piece selectedPiece;
 
-    public HumanPlayer(Board board) {
-        super(board);
-    }
-    public HumanPlayer(Board board, String name) {
+    public HumanPlayer(Board board, String name, Piece selectedPiece) {
         super(board);
         this.name = name;
+        this.selectedPiece = selectedPiece;
     }
 
     @Override
     public void move(int row, int col) {
-
     }
 }

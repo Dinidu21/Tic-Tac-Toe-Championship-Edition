@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Getter
 @Setter
-public class BoardImpl implements BoardUI, Serializable {
+public class BoardImpl implements Board, Serializable {
     private Piece[][] pieces;
     private BoardUI boardUI;
 
@@ -16,15 +16,10 @@ public class BoardImpl implements BoardUI, Serializable {
         initializeBoard();
     }
 
-    public BoardImpl(BoardUI boardUI) {
-        this();
-        this.boardUI = boardUI;
-    }
-
     @Override
     public void initializeBoard() {
-        for (Piece[] piece : pieces) {
-            Arrays.fill(piece, Piece.EMPTY);
+        for (int i = 0; i < pieces.length; i++) {
+            Arrays.fill(pieces[i], Piece.EMPTY);
         }
     }
 
@@ -36,7 +31,7 @@ public class BoardImpl implements BoardUI, Serializable {
     }
 
     @Override
-    public Boolean isLegalMove(int row, int col) {
+    public boolean isLegalMove(int row, int col) {
         return (row >= 0 && row < 3 && col >= 0 && col < 3) && (pieces[row][col] == Piece.EMPTY);
     }
 
@@ -47,13 +42,20 @@ public class BoardImpl implements BoardUI, Serializable {
         } else {
             pieces[row][col] = piece;
             System.out.println("Move updated: " + piece + " placed at (" + row + ", " + col + ")");
-            boardUI.update(col, row, true);
+            if (boardUI != null) {
+                boardUI.update(col, row, true);
+            }
         }
     }
 
     @Override
     public Winner checkWinner() {
         return null;
+    }
+
+    @Override
+    public BoardUI getBoardUI() {
+        return boardUI;
     }
 
     @Override

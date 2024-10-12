@@ -8,4 +8,7 @@ public interface Board {
     Winner checkWinner();
     void printBoard();
 
+    void update(int col, int row, boolean isHuman);
+
+    void notifyWinner();
 }
