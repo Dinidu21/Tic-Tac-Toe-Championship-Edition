@@ -18,18 +18,21 @@ public class BoardImpl implements BoardUI, Serializable {
 
     public BoardImpl(BoardUI boardUI) {
         this();
+        this.boardUI = boardUI;
     }
 
     @Override
     public void initializeBoard() {
-        for (int i = 0; i < pieces.length; i++) {
-            Arrays.fill(pieces[i], Piece.EMPTY);
+        for (Piece[] piece : pieces) {
+            Arrays.fill(piece, Piece.EMPTY);
         }
     }
 
     @Override
     public void printBoard() {
-
+        for (Piece[] row : pieces) {
+            System.out.println(Arrays.toString(row));
+        }
     }
 
     @Override
@@ -44,21 +47,20 @@ public class BoardImpl implements BoardUI, Serializable {
         } else {
             pieces[row][col] = piece;
             System.out.println("Move updated: " + piece + " placed at (" + row + ", " + col + ")");
+            boardUI.update(col, row, true);
         }
     }
 
-@Override
+    @Override
     public Winner checkWinner() {
         return null;
     }
 
     @Override
     public void update(int col, int row, boolean isHuman) {
-
     }
 
     @Override
     public void notifyWinner() {
-
     }
 }

@@ -12,13 +12,9 @@ public class AIPlayer extends Player implements Serializable {
     private Random random;
     private Board board;
 
-    public AIPlayer() {
-       super(null);
-    }
-
     public AIPlayer(Board board) {
-        this();
-        this.board = board;
+        super(board);
+        this.random = new Random();
     }
 
     @Override

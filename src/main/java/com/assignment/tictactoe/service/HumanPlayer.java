@@ -6,16 +6,15 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-
 public class HumanPlayer extends Player implements Serializable {
     private String name;
 
-    public HumanPlayer() {
-        super(null);
-    }
-
     public HumanPlayer(Board board) {
         super(board);
+    }
+    public HumanPlayer(Board board, String name) {
+        super(board);
+        this.name = name;
     }
 
     @Override
