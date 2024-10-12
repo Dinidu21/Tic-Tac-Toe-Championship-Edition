@@ -11,6 +11,20 @@
     -fx-padding: 10px;
 }
 
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #5734b4;
+}
+
+.button-base {
+    -fx-background-color: #5734b4;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
 .game-button {
     -fx-background-color: #f0f0f0;
     -fx-border-color: #5734b4;
@@ -20,12 +34,14 @@
     -fx-min-width: 100px;
     -fx-min-height: 100px;
     -fx-cursor: hand;
-    -fx-transition: background-color 0.3s ease-in-out;
+    -fx-transition: background-color 0.3s ease-in-out, scale 0.3s;
 }
 
 .game-button:hover {
     -fx-background-color: #ff318c;
     -fx-text-fill: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .winning-cell {
@@ -33,7 +49,7 @@
     -fx-text-fill: white;
     -fx-border-width: 2px;
     -fx-border-color: #fff;
-    -fx-effect: dropshadow(gaussian, rgba(255, 50, 140, 0.5), 10, 0.5, 0, 0); /
+    -fx-effect: dropshadow(gaussian, rgba(255, 50, 140, 0.5), 10, 0.5, 0, 0);
 }
 
 .status-label {
@@ -59,6 +75,7 @@
     -fx-border-color: #ff318c;
 }
 
+
 .text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #5734b4;
@@ -71,12 +88,23 @@
     -fx-effect: inner-shadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 0);
 }
 
-
-.button {
-    -fx-transition: background-color 0.2s, scale 0.2s;
+.custom-button {
+-fx-background-color: #5734b4;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
 }
 
-.button:hover {
+.custom-button:hover {
+    -fx-background-color: #ff318c;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+}
+
+.custom-button:pressed {
+    -fx-background-color: #ff2050;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }

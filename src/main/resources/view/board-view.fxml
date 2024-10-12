@@ -29,7 +29,7 @@
         </Label>
 
         <!-- Start Game Button -->
-        <Button fx:id="startGameButton" layoutX="337.0" layoutY="27.0" onAction="#startGame" text="Start Game" />
+        <Button fx:id="startGameButton" layoutX="312.0" layoutY="23.0" onAction="#startGame" style="-fx-background-radius: 20;" styleClass="custom-button" text="Start Game" />
 
         <!-- Game Board Grid -->
         <GridPane fx:id="gameBoard" gridLinesVisible="true" layoutX="25.0" layoutY="150.0" prefHeight="394.0" prefWidth="400.0" style="-fx-background-color: #fafafa; -fx-border-color: #333333; -fx-border-width: 2;">
