@@ -20,6 +20,9 @@ public class AIPlayer extends Player implements Serializable {
 
     @Override
     public void move(int row, int col) {
-
+        int[] spot = ((BoardImpl) board).findNextAvailableSpot();
+        if (spot != null) {
+            board.updateMove(spot[0], spot[1], selectedPiece);
+        }
     }
 }
