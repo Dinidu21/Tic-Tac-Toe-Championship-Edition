@@ -8,6 +8,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 public class BoardController implements BoardUI {
+    public static final String EASY = "Easy";
+    public static final String HARD = "Hard";
+    public ComboBox<String> difficultyBox;
+    public Button playagainbtn;
     @FXML
     private Button startGameButton;
     @FXML
@@ -28,7 +32,9 @@ public class BoardController implements BoardUI {
 
     @FXML
     public void initialize() {
+        playagainbtn.setDisable(true);
         pieceSelection.getItems().addAll(Piece.X, Piece.O);
+        difficultyBox.getItems().addAll(EASY,HARD);
         gameButtons = new Button[3][3];
 
         // Initialize the buttons in the GridPane
@@ -46,12 +52,15 @@ public class BoardController implements BoardUI {
                 event.consume();
             }
         });
+        // Add Play Again button click event
+        playagainbtn.setOnAction(this::playAgain);
     }
 
     @FXML
     public void startGame() {
         String playerName = playerNameField.getText();
         currentPlayerPiece = pieceSelection.getValue();
+        String difLvl = String.valueOf(difficultyBox.getValue());
 
         if (currentPlayerPiece == null) {
             statusMessage.setText("Please select a piece.");
@@ -73,11 +82,6 @@ public class BoardController implements BoardUI {
         playerNameField.setDisable(true);
         pieceSelection.setDisable(true);
         board.printBoard();
-
-/*      If the human selected 'O', the AI starts first
-        if (currentPlayerPiece == Piece.O) {
-            makeAIMove();
-        }*/
     }
 
     @FXML
@@ -106,36 +110,45 @@ public class BoardController implements BoardUI {
         Winner winner = board.checkWinner();
         if (winner != null) {
             isGameOver = true;
+            notifyWinner();
             disableAllButtons();  // Disable buttons after game ends
-
-            // Determine the game result (tie or win)
+            playagainbtn.setDisable(false);
+            // Determine the game result tie
             if (winner.getWinningPiece() == Piece.EMPTY) {
                 statusMessage.setText("It's a tie!");
-            } else {
-                String winnerName = (winner.getWinningPiece() == humanPlayer.getSelectedPiece()) ?
-                        humanPlayer.getName() : "AI";
-                statusMessage.setText(winnerName + " wins!");
-            }
-
-            try {
-                Thread.sleep(600);
-                // Show confirmation dialog asking the user if they want to play again
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                        "Do you want to play again?", ButtonType.YES, ButtonType.NO);
-                alert.setTitle("Game Over");
-                alert.setHeaderText(null);
-
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.YES) {
-                        resetGame();
-                    } else {
-                        statusMessage.setText("Game over! Thanks for playing.");
-                    }
-                });
-            } catch (InterruptedException e) {
-                System.out.println("Interruption Failed");
+                disableAllButtons();
+                playagainbtn.setDisable(false);  // Enable Play Again button after tie
             }
         }
+    }
+
+    @Override
+    public void notifyWinner() {
+        Winner winner = board.checkWinner();
+        if (winner != null) {
+            String winnerName = (winner.getWinningPiece() == humanPlayer.getSelectedPiece())
+                    ? humanPlayer.getName() : "AI";
+            statusMessage.setText(winnerName + " wins!");
+            disableAllButtons();
+            difficultyBox.setDisable(true);
+            isGameOver = true;
+            playagainbtn.setDisable(false);  // Enable Play Again button after game over
+        }
+    }
+
+    @Override
+    public void update(int col, int row, boolean isHuman) {
+        Button button = gameButtons[row][col];
+        Piece piece = isHuman ? humanPlayer.getSelectedPiece() : aiPlayer.getSelectedPiece();
+        button.setText(piece.toString());  // Update the button with the current player's piece (X or O)
+        button.setDisable(true);  // Disable the button after it's been clicked
+    }
+
+    private void playAgain(ActionEvent event) {
+        resetGame(); // Reset the game when Play Again is pressed
+        difficultyBox.setDisable(true);
+        startGameButton.setDisable(true);
+        pieceSelection.setDisable(true);
     }
 
     private void resetGame() {
@@ -149,9 +162,7 @@ public class BoardController implements BoardUI {
                 button.setDisable(false); // Re-enable the button
             }
         }
-
         statusMessage.setText(humanPlayer.getName() + " vs AI - Game Restarted!");
-
     }
 
     private void disableAllButtons() {
@@ -176,19 +187,5 @@ public class BoardController implements BoardUI {
             aiPlayer.move(spot[0], spot[1]);  // Let the AI player make its move
             update(spot[1], spot[0], false);  // Update the board UI after the move (col, row)
         }
-    }
-
-    @Override
-    public void update(int col, int row, boolean isHuman) {
-        Button button = gameButtons[row][col];
-        Piece piece = isHuman ? humanPlayer.getSelectedPiece() : aiPlayer.getSelectedPiece();
-        button.setText(piece.toString());  // Update the button with the current player's piece (X or O)
-        button.setDisable(true);  // Disable the button after it's been clicked
-    }
-
-    @Override
-    public void notifyWinner() {
-        // This method is called when a winner is found
-        // We're handling this in checkGameState(), so we can leave this empty
     }
 }
