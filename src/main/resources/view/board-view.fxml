@@ -9,26 +9,26 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="556.0" prefWidth="450.0" stylesheets="@../styles/board.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assignment.tictactoe.controller.BoardController">
+<AnchorPane prefHeight="608.0" prefWidth="451.0" stylesheets="@../styles/board.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assignment.tictactoe.controller.BoardController">
     <children>
         <!-- Player Input Section -->
-        <Label layoutX="7.0" layoutY="17.0" styleClass="player-label" text="Enter Player Name:" />
-        <TextField fx:id="playerNameField" layoutX="140.0" layoutY="11.0" prefHeight="30.0" prefWidth="150.0" promptText="Sachintha" styleClass="text-field" />
+        <Label layoutX="7.0" layoutY="13.0" prefHeight="34.0" prefWidth="145.0" styleClass="player-label" text="Enter Player Name :" />
+        <TextField fx:id="playerNameField" layoutX="159.0" layoutY="15.0" prefHeight="33.0" prefWidth="141.0" promptText="Sachintha" styleClass="text-field" />
 
-        <Label layoutX="6.0" layoutY="57.0" styleClass="player-label" text="Choose Your Piece:" />
-        <ComboBox fx:id="pieceSelection" layoutX="140.0" layoutY="55.0" prefHeight="20.0" prefWidth="150.0" promptText="X | O" styleClass="combo-box">
+        <Label layoutX="6.0" layoutY="57.0" prefHeight="30.0" prefWidth="150.0" styleClass="player-label" text="Choose Your Piece :" />
+        <ComboBox fx:id="pieceSelection" layoutX="158.0" layoutY="55.0" prefHeight="31.0" prefWidth="141.0" promptText="X | O" styleClass="combo-box">
             <items>
                 <!-- Items will be populated in the controller -->
             </items>
         </ComboBox>
 
-        <Label fx:id="statusMessage" layoutX="25.0" layoutY="92.0" prefHeight="25.0" prefWidth="400.0" styleClass="status-label" textFill="RED" />
+        <Label fx:id="statusMessage" layoutX="24.0" layoutY="138.0" prefHeight="25.0" prefWidth="400.0" styleClass="status-label" textFill="RED" />
 
         <!-- Start Game Button -->
-        <Button fx:id="startGameButton" layoutX="312.0" layoutY="23.0" onAction="#startGame" style="-fx-background-radius: 25;" styleClass="custom-button" text="Start Game" />
+        <Button fx:id="startGameButton" layoutX="311.0" layoutY="10.0" onAction="#startGame" prefHeight="22.0" prefWidth="132.0" style="-fx-background-radius: 25;" styleClass="custom-button" text="Start Game" />
 
         <!-- Game Board Grid -->
-        <GridPane fx:id="gameBoard" gridLinesVisible="true" layoutX="25.0" layoutY="150.0" prefHeight="394.0" prefWidth="400.0" styleClass="game-board">
+        <GridPane fx:id="gameBoard" gridLinesVisible="true" layoutX="24.0" layoutY="199.0" prefHeight="394.0" prefWidth="400.0" styleClass="game-board">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="130.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="130.0" />
@@ -41,7 +41,7 @@
             </rowConstraints>
 
             <Button fx:id="button00" minHeight="130.0" minWidth="126.0" onAction="#handleButtonClick" prefHeight="130.0" prefWidth="126.0" styleClass="game-button" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="186.0" prefWidth="186.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="186.0" prefWidth="186.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
             <Button fx:id="button02" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="0" />
             <Button fx:id="button10" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Button fx:id="button11" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -50,5 +50,8 @@
             <Button fx:id="button21" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="button22" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         </GridPane>
+      <Label layoutX="7.0" layoutY="95.0" styleClass="player-label" text="Select Your Difficulty:" />
+      <ComboBox fx:id="difficultyBox" layoutX="159.0" layoutY="94.0" prefHeight="31.0" prefWidth="114.0" promptText="Easy" />
+      <Button fx:id="playagainbtn" layoutX="311.0" layoutY="73.0" onAction="#startGame" prefHeight="22.0" prefWidth="132.0" style="-fx-background-radius: 25;" styleClass="custom-button" />
     </children>
 </AnchorPane>
