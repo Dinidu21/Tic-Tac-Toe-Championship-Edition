@@ -3,15 +3,13 @@ package com.assignment.tictactoe.controller;
 import com.assignment.tictactoe.service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
-public class BoardController {
-    public Button startGameButton;
+public class BoardController implements BoardUI {
+    @FXML
+    private Button startGameButton;
     @FXML
     private TextField playerNameField;
     @FXML
@@ -20,16 +18,20 @@ public class BoardController {
     private GridPane gameBoard;
     @FXML
     private Label statusMessage;
-    private Button[][] gameButtons;
-    private Board board;
+
     private HumanPlayer humanPlayer;
     private AIPlayer aiPlayer;
+    private Board board;
+    private Button[][] gameButtons;
     private Piece currentPlayerPiece;
+    private boolean isGameOver = false;
 
     @FXML
     public void initialize() {
         pieceSelection.getItems().addAll(Piece.X, Piece.O);
         gameButtons = new Button[3][3];
+
+        // Initialize the buttons in the GridPane
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 gameButtons[i][j] = (Button) gameBoard.getChildren().get(i * 3 + j);
@@ -37,7 +39,7 @@ public class BoardController {
             }
         }
 
-        // Restrict player name input to alphabets
+        // Only allow alphabetic characters in player name
         playerNameField.addEventFilter(KeyEvent.KEY_TYPED, event -> {
             String character = event.getCharacter();
             if (!character.matches("[a-zA-Z]")) {
@@ -58,47 +60,98 @@ public class BoardController {
             statusMessage.setText("Please enter your name.");
             return;
         }
-        enableAllButtons();
 
-        board = new BoardImpl();
+        board = new BoardImpl(this);
         humanPlayer = new HumanPlayer(board, playerName, currentPlayerPiece);
         aiPlayer = new AIPlayer(board, currentPlayerPiece == Piece.X ? Piece.O : Piece.X);
-        System.out.println(playerName+" s Piece is : "+humanPlayer.getSelectedPiece());
-        System.out.println("AI s Piece is :" +aiPlayer.getSelectedPiece());
+
+        enableAllButtons();
         statusMessage.setText(playerName + " vs AI - Game Started!");
+        System.out.println(playerName + "'s Piece is: " + humanPlayer.getSelectedPiece());
+        System.out.println("AI's Piece is: " + aiPlayer.getSelectedPiece());
         startGameButton.setDisable(true);
         playerNameField.setDisable(true);
         pieceSelection.setDisable(true);
         board.printBoard();
+
+//        // If the human selected 'O', the AI starts first
+//        if (currentPlayerPiece == Piece.O) {
+//            makeAIMove();
+//        }
     }
 
     @FXML
     public void handleButtonClick(ActionEvent event) {
+        if (isGameOver) {Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to play again", ButtonType.YES,ButtonType.NO);}
         Button clickedButton = (Button) event.getSource();
         int row = GridPane.getRowIndex(clickedButton);
         int col = GridPane.getColumnIndex(clickedButton);
 
         if (board.isLegalMove(row, col)) {
-            board.updateMove(row, col, humanPlayer.getSelectedPiece());
-            clickedButton.setText(humanPlayer.getSelectedPiece().toString());
-            clickedButton.setDisable(true);
-        } else {
-            statusMessage.setText("This move is not allowed. Try another spot.");
+            System.out.println("Now its your turn "+playerNameField.getText());
+            humanPlayer.move(row, col);  // Human player makes a move
+            update(col, row, true);      // Update board UI for human move
+            board.printBoard();
+            checkGameState();            // Check if human wins or if there's a tie
+            if (!isGameOver) {
+                System.out.println("Now AI going to make move");
+                makeAIMove();             // AI makes a move after human
+                board.printBoard();
+                checkGameState();         // Check if AI wins or if there's a tie
+            }
+        }
+    }
+
+    private void makeAIMove() {
+        int[] spot = ((BoardImpl) board).findNextAvailableSpot();  // Get the next available spot
+        if (spot != null) {
+            aiPlayer.move(spot[0], spot[1]);  // Let the AI player make its move
+            update(spot[1], spot[0], false);  // Update the board UI after the move (col, row)
+        }
+    }
+
+    private void checkGameState() {
+        Winner winner = board.checkWinner();
+        if (winner != null) {
+            isGameOver = true;
+            disableAllButtons();
+            if (winner.getWinningPiece() == Piece.EMPTY) {
+                statusMessage.setText("It's a tie!");
+            } else {
+                String winnerName = winner.getWinningPiece() == humanPlayer.getSelectedPiece() ?
+                        humanPlayer.getName() : "AI";
+                statusMessage.setText(winnerName + " wins!");
+            }
         }
     }
 
     private void disableAllButtons() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                gameButtons[i][j].setDisable(true);
+        for (Button[] row : gameButtons) {
+            for (Button button : row) {
+                button.setDisable(true);
             }
         }
     }
+
     private void enableAllButtons() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                gameButtons[i][j].setDisable(false);
+        for (Button[] row : gameButtons) {
+            for (Button button : row) {
+                button.setDisable(false);
             }
         }
+    }
+
+    @Override
+    public void update(int col, int row, boolean isHuman) {
+        Button button = gameButtons[row][col];
+        Piece piece = isHuman ? humanPlayer.getSelectedPiece() : aiPlayer.getSelectedPiece();
+        button.setText(piece.toString());  // Update the button with the current player's piece (X or O)
+        button.setDisable(true);  // Disable the button after it's been clicked
+    }
+
+    @Override
+    public void notifyWinner() {
+        // This method is called when a winner is found
+        // We're handling this in checkGameState(), so we can leave this empty
     }
 }
