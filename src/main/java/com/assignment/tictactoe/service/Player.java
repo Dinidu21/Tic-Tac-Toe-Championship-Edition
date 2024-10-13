@@ -2,10 +2,8 @@ package com.assignment.tictactoe.service;
 
 public abstract class Player {
     protected Board board;
-
     public Player(Board board) {
         this.board = board;
     }
-
-    abstract void move(int row, int col);
+    public abstract void move(int row, int col);
 }
