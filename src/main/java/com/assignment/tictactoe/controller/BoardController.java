@@ -74,15 +74,15 @@ public class BoardController implements BoardUI {
         pieceSelection.setDisable(true);
         board.printBoard();
 
-//        // If the human selected 'O', the AI starts first
-//        if (currentPlayerPiece == Piece.O) {
-//            makeAIMove();
-//        }
+/*      If the human selected 'O', the AI starts first
+        if (currentPlayerPiece == Piece.O) {
+            makeAIMove();
+        }*/
     }
 
     @FXML
     public void handleButtonClick(ActionEvent event) {
-        if (isGameOver) {Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to play again", ButtonType.YES,ButtonType.NO);}
+        if (isGameOver) return;
         Button clickedButton = (Button) event.getSource();
         int row = GridPane.getRowIndex(clickedButton);
         int col = GridPane.getColumnIndex(clickedButton);
@@ -102,27 +102,56 @@ public class BoardController implements BoardUI {
         }
     }
 
-    private void makeAIMove() {
-        int[] spot = ((BoardImpl) board).findNextAvailableSpot();  // Get the next available spot
-        if (spot != null) {
-            aiPlayer.move(spot[0], spot[1]);  // Let the AI player make its move
-            update(spot[1], spot[0], false);  // Update the board UI after the move (col, row)
-        }
-    }
-
     private void checkGameState() {
         Winner winner = board.checkWinner();
         if (winner != null) {
             isGameOver = true;
-            disableAllButtons();
+            disableAllButtons();  // Disable buttons after game ends
+
+            // Determine the game result (tie or win)
             if (winner.getWinningPiece() == Piece.EMPTY) {
                 statusMessage.setText("It's a tie!");
             } else {
-                String winnerName = winner.getWinningPiece() == humanPlayer.getSelectedPiece() ?
+                String winnerName = (winner.getWinningPiece() == humanPlayer.getSelectedPiece()) ?
                         humanPlayer.getName() : "AI";
                 statusMessage.setText(winnerName + " wins!");
             }
+
+            try {
+                Thread.sleep(600);
+                // Show confirmation dialog asking the user if they want to play again
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                        "Do you want to play again?", ButtonType.YES, ButtonType.NO);
+                alert.setTitle("Game Over");
+                alert.setHeaderText(null);
+
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        resetGame();
+                    } else {
+                        statusMessage.setText("Game over! Thanks for playing.");
+                    }
+                });
+            } catch (InterruptedException e) {
+                System.out.println("Interruption Failed");
+            }
         }
+    }
+
+    private void resetGame() {
+        board.initializeBoard(); // Resetting the board state
+        isGameOver = false; // Reset game-over state
+
+        // Clear the text of all buttons and re-enable them
+        for (Button[] row : gameButtons) {
+            for (Button button : row) {
+                button.setText(""); // Clear the button text
+                button.setDisable(false); // Re-enable the button
+            }
+        }
+
+        statusMessage.setText(humanPlayer.getName() + " vs AI - Game Restarted!");
+
     }
 
     private void disableAllButtons() {
@@ -138,6 +167,14 @@ public class BoardController implements BoardUI {
             for (Button button : row) {
                 button.setDisable(false);
             }
+        }
+    }
+
+    private void makeAIMove() {
+        int[] spot = ((BoardImpl) board).findNextAvailableSpot();  // Get the next available spot
+        if (spot != null) {
+            aiPlayer.move(spot[0], spot[1]);  // Let the AI player make its move
+            update(spot[1], spot[0], false);  // Update the board UI after the move (col, row)
         }
     }
 
