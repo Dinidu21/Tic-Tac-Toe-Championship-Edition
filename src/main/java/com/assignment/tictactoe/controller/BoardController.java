@@ -104,16 +104,23 @@ public class BoardController implements BoardUI {
         int col = GridPane.getColumnIndex(clickedButton);
 
         if (board.isLegalMove(row, col)) {
-            System.out.println("Now its your turn "+playerNameField.getText());
-            humanPlayer.move(row, col);  // Human player makes a move
+            // Human player makes a move
+            humanPlayer.move(row, col);
             update(col, row, true);      // Update board UI for human move
+            statusMessage.setText("AI's Turn");  // Set status message to AI's turn
+
             board.printBoard();
-            checkGameState();            // Check if human wins or if there's a tie
+            checkGameState();  // Check if human wins or if there's a tie
+
+            // Let AI move if the game is not over
             if (!isGameOver) {
-                System.out.println("Now AI going to make move");
-                makeAIMove();             // AI makes a move after human
+                makeAIMove();
                 board.printBoard();
-                checkGameState();         // Check if AI wins or if there's a tie
+                checkGameState();  // Check if AI wins or if there's a tie
+
+                if (!isGameOver) {
+                    statusMessage.setText("Your Turn");  // Set status message to Human's turn
+                }
             }
         }
     }
@@ -199,6 +206,8 @@ public class BoardController implements BoardUI {
         } else {
             makeEasyAIMove();
         }
+        // After AI makes a move, update the status message
+        statusMessage.setText("Your Turn");
     }
 
     private void makeEasyAIMove() {
