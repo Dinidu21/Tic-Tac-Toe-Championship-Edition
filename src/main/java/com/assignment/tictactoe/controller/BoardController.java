@@ -4,6 +4,8 @@ import com.assignment.tictactoe.service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
@@ -35,13 +37,21 @@ public class BoardController implements BoardUI {
         playagainbtn.setDisable(true);
         pieceSelection.getItems().addAll(Piece.X, Piece.O);
         difficultyBox.getItems().addAll(EASY,HARD);
+
+        Image image = new Image(getClass().getResource("/icons/pAgain.png").toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(40);
+
+        playagainbtn.setGraphic(imageView);
+
         gameButtons = new Button[3][3];
 
         // Initialize the buttons in the GridPane
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 gameButtons[i][j] = (Button) gameBoard.getChildren().get(i * 3 + j);
-                gameButtons[i][j].setDisable(true);  // Disable until game starts
+                gameButtons[i][j].setDisable(true);
             }
         }
 
