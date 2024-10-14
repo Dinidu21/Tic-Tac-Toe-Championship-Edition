@@ -28,6 +28,27 @@
     -fx-scale-y: 0.95;
 }
 
+/*play again btn*/
+.playagain-button {
+   -fx-background-color: #5734b4;
+   -fx-background-radius: 25;
+   -fx-cursor: hand;
+}
+
+.playagain-button:hover {
+    -fx-background-color: #ff318c;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.playagain-button:pressed {
+    -fx-background-color: #ff2050;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+
+
 /* Style for labels */
 .player-label {
     -fx-font-family: 'Poppins'; /* Specific font for labels */

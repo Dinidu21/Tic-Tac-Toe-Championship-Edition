@@ -41,7 +41,7 @@
             </rowConstraints>
 
             <Button fx:id="button00" minHeight="130.0" minWidth="126.0" onAction="#handleButtonClick" prefHeight="130.0" prefWidth="126.0" styleClass="game-button" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="186.0" prefWidth="186.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Button fx:id="button01" onAction="#handleButtonClick" prefHeight="186.0" prefWidth="186.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Button fx:id="button02" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="0" />
             <Button fx:id="button10" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Button fx:id="button11" onAction="#handleButtonClick" prefHeight="136.0" prefWidth="136.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -52,6 +52,6 @@
         </GridPane>
       <Label layoutX="7.0" layoutY="95.0" styleClass="player-label" text="Select Your Difficulty:" />
       <ComboBox fx:id="difficultyBox" layoutX="159.0" layoutY="94.0" prefHeight="31.0" prefWidth="114.0" promptText="Easy" />
-      <Button fx:id="playagainbtn" layoutX="311.0" layoutY="73.0" onAction="#startGame" prefHeight="22.0" prefWidth="132.0" style="-fx-background-radius: 25;" styleClass="custom-button" />
+      <Button fx:id="playagainbtn" layoutX="354.0" layoutY="73.0" onAction="#startGame" prefHeight="44.0" prefWidth="46.0" styleClass="playagain-button" />
     </children>
 </AnchorPane>
