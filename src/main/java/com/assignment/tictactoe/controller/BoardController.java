@@ -31,12 +31,15 @@ public class BoardController implements BoardUI {
     private Button[][] gameButtons;
     private Piece currentPlayerPiece;
     private boolean isGameOver = false;
+    private String currentDifficulty;
 
     @FXML
     public void initialize() {
         playagainbtn.setDisable(true);
         pieceSelection.getItems().addAll(Piece.X, Piece.O);
-        difficultyBox.getItems().addAll(EASY,HARD);
+        difficultyBox.getItems().addAll(EASY, HARD);
+        difficultyBox.setValue(EASY); // Set default difficulty to Easy
+        currentDifficulty = EASY;
 
         Image image = new Image(getClass().getResource("/icons/pAgain.png").toExternalForm());
         ImageView imageView = new ImageView(image);
@@ -54,7 +57,6 @@ public class BoardController implements BoardUI {
                 gameButtons[i][j].setDisable(true);
             }
         }
-
         // Only allow alphabetic characters in player name
         playerNameField.addEventFilter(KeyEvent.KEY_TYPED, event -> {
             String character = event.getCharacter();
@@ -70,7 +72,7 @@ public class BoardController implements BoardUI {
     public void startGame() {
         String playerName = playerNameField.getText();
         currentPlayerPiece = pieceSelection.getValue();
-        String difLvl = String.valueOf(difficultyBox.getValue());
+        currentDifficulty = difficultyBox.getValue();
 
         if (currentPlayerPiece == null) {
             statusMessage.setText("Please select a piece.");
@@ -192,10 +194,26 @@ public class BoardController implements BoardUI {
     }
 
     private void makeAIMove() {
-        int[] spot = ((BoardImpl) board).findNextAvailableSpot();  // Get the next available spot
-        if (spot != null) {
-            aiPlayer.move(spot[0], spot[1]);  // Let the AI player make its move
-            update(spot[1], spot[0], false);  // Update the board UI after the move (col, row)
+        if (currentDifficulty.equals(HARD)) {
+            //makeHardAIMove();
+        } else {
+            makeEasyAIMove();
         }
     }
+
+    private void makeEasyAIMove() {
+        int[] spot = ((BoardImpl) board).findNextAvailableSpot();
+        if (spot != null) {
+            aiPlayer.move(spot[0], spot[1]);
+            update(spot[1], spot[0], false);
+        }
+    }
+
+/*    private void makeHardAIMove() {
+        int[] bestMove = aiPlayer.findBestMove(board);
+        if (bestMove != null) {
+            aiPlayer.move(bestMove[0], bestMove[1]);
+            update(bestMove[1], bestMove[0], false);
+        }
+    }*/
 }
