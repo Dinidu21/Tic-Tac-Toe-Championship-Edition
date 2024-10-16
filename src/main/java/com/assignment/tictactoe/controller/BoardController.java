@@ -84,7 +84,7 @@ public class BoardController implements BoardUI {
 
         board = new BoardImpl(this);
         humanPlayer = new HumanPlayer(board, playerName, currentPlayerPiece);
-        aiPlayer = new AIPlayer(board, currentPlayerPiece == Piece.X ? Piece.O : Piece.X,currentDifficulty);
+        aiPlayer = new AIPlayer(board, currentPlayerPiece == Piece.X ? Piece.O : Piece.X);
 
         enableAllButtons();
         statusMessage.setText(playerName + " vs AI - Game Started!");
@@ -114,7 +114,7 @@ public class BoardController implements BoardUI {
 
             // Let AI move if the game is not over
             if (!isGameOver) {
-                aiPlayer.move(-1,-1);
+                makeAIMove();
                 board.printBoard();
                 checkGameState();  // Check if AI wins or if there's a tie
 
@@ -200,4 +200,29 @@ public class BoardController implements BoardUI {
         }
     }
 
+    private void makeAIMove() {
+        if (currentDifficulty.equals(HARD)) {
+            //makeHardAIMove();
+        } else {
+            makeEasyAIMove();
+        }
+        // After AI makes a move, update the status message
+        statusMessage.setText("Your Turn");
+    }
+
+    private void makeEasyAIMove() {
+        int[] spot = ((BoardImpl) board).findNextAvailableSpot();
+        if (spot != null) {
+            aiPlayer.move(spot[0], spot[1]);
+            update(spot[1], spot[0], false);
+        }
+    }
+
+/*    private void makeHardAIMove() {
+        int[] bestMove = aiPlayer.findBestMove(board);
+        if (bestMove != null) {
+            aiPlayer.move(bestMove[0], bestMove[1]);
+            update(bestMove[1], bestMove[0], false);
+        }
+    }*/
 }

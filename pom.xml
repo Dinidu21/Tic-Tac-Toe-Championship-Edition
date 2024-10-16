@@ -68,7 +68,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.assignment.tictactoe.tictactoechampionshipedition/com.assignment.tictactoe.HelloApplication
+                                com.assignment.tictactoe.tictactoechampionshipedition/com.assignment.tictactoe.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
