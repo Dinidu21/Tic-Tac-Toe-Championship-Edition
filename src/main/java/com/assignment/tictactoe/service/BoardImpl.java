@@ -3,7 +3,9 @@ package com.assignment.tictactoe.service;
 import com.assignment.tictactoe.controller.BoardController;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
 @Getter
 @Setter
 
@@ -55,13 +57,8 @@ public class BoardImpl implements Board, Serializable {
 
     @Override
     public void updateMove(int row, int col, Piece piece) {
-        if (isLegalMove(row, col)) {
-            pieces[row][col] = piece;
-            boardUI.update(col, row, piece == Piece.X);
-        } else if (piece == Piece.EMPTY) {
-            pieces[row][col] = piece;
-            boardUI.update(col, row, piece == Piece.EMPTY);
-        }
+        System.out.println("Row : "+row + " \nCol : "+ col+ "\nMe welawe pass una piece eka : "+piece);
+        pieces[row][col] = piece;
     }
 
     @Override
