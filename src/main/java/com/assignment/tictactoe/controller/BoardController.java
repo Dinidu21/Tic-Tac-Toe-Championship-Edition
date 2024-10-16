@@ -202,7 +202,7 @@ public class BoardController implements BoardUI {
 
     private void makeAIMove() {
         if (currentDifficulty.equals(HARD)) {
-            //makeHardAIMove();
+            makeHardAIMove();
         } else {
             makeEasyAIMove();
         }
@@ -218,11 +218,11 @@ public class BoardController implements BoardUI {
         }
     }
 
-/*    private void makeHardAIMove() {
+    private void makeHardAIMove() {
         int[] bestMove = aiPlayer.findBestMove(board);
         if (bestMove != null) {
             aiPlayer.move(bestMove[0], bestMove[1]);
             update(bestMove[1], bestMove[0], false);
         }
-    }*/
+    }
 }

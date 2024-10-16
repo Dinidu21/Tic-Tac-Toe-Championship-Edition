@@ -58,6 +58,9 @@ public class BoardImpl implements Board, Serializable {
         if (isLegalMove(row, col)) {
             pieces[row][col] = piece;
             boardUI.update(col, row, piece == Piece.X);
+        } else if (piece == Piece.EMPTY) {
+            pieces[row][col] = piece;
+            boardUI.update(col, row, piece == Piece.EMPTY);
         }
     }
 
