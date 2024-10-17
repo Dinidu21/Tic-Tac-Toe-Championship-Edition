@@ -9,8 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
-import java.util.Arrays;
-
 public class BoardController implements BoardUI {
     public static final String EASY = "Easy";
     public static final String HARD = "Hard";
@@ -96,6 +94,14 @@ public class BoardController implements BoardUI {
         playerNameField.setDisable(true);
         pieceSelection.setDisable(true);
         board.printBoard();
+
+        // If the player selected Piece O, let the AI make the first move
+        if (currentPlayerPiece == Piece.O) {
+            statusMessage.setText("AI's Turn");  // Set status message to AI's turn
+            makeAIMove();  // AI makes the first move
+            board.printBoard();
+            statusMessage.setText("Your Turn");  // Set status message to Human's turn
+        }
     }
 
     @FXML
