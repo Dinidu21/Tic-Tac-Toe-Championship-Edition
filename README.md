@@ -75,6 +75,10 @@ The AI uses the **Minimax algorithm**, which is a decision-making algorithm for 
 ### 3. **Victory Screen:**
 ![image](https://github.com/user-attachments/assets/5c608fe6-5e22-4e35-9ea1-15b5fa5beca8)
 
+### 4. **Score Screen:**
+![image](https://github.com/user-attachments/assets/7bceb0d5-e9e5-49a9-9df8-2f809277dccd)
+
+
 
 ---
 
