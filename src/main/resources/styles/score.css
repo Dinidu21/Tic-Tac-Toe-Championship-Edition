@@ -1,0 +1,96 @@
+/* score.css */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+}
+
+.container {
+    max-width: 90%; /* Use percentage for responsiveness */
+    width: 500px; /* Set a maximum width */
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.5); /* Increased transparency */
+    border-radius: 15px; /* Slightly more rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Softer shadow for a richer look */
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s; /* Smooth transition for scaling */
+    backdrop-filter: blur(10px); /* Add blur effect to background */
+}
+
+.container:hover {
+    transform: scale(1.03); /* Slight scale effect on hover */
+}
+
+h1 {
+    color: #343a40;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.score {
+    font-weight: bold;
+    color: #007bff; /* Color for player scores */
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.tie {
+    color: #e67e22; /* Color for ties */
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.difficulty {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #6c757d; /* Color for difficulty text */
+}
+
+.difficulty.hard {
+    color: red; /* Red color for hard difficulty */
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #5734b4; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s; /* Added transition for button */
+}
+
+.button:hover {
+    background-color: #ff318c; /* Button hover color */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Reduce font size on smaller screens */
+    }
+
+    .score, .tie, .difficulty {
+        font-size: 1.2em; /* Reduce font size for scores and difficulty */
+    }
+
+    .button {
+        padding: 8px 16px; /* Reduce button padding */
+        font-size: 0.9em; /* Reduce button font size */
+    }
+
+    .container {
+        padding: 20px; /* Reduce padding on smaller screens */
+    }
+}
