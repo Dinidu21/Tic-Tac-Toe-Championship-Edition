@@ -61,7 +61,6 @@ public class AIPlayer extends Player implements Serializable {
     private int minimax(BoardImpl board, int depth, boolean isMaximizing) {
         Winner winner = board.checkWinner(); // Check for a winner
 
-        // Check if the game is over and return the appropriate score
         if (winner != null) {
             if (winner.getWinningPiece() == selectedPiece) {
                 return 10 - depth; // AI wins
@@ -102,14 +101,15 @@ public class AIPlayer extends Player implements Serializable {
     }
 
 
-    public boolean isBoardFull() {
+/*    public boolean isBoardFull(BoardImpl board) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board.isLegalMove(i, j)) {
-                    return false; // Found an empty cell, board is not full
+
                 }
             }
         }
-        return true; // No empty cells found, board is full
-    }
+
+    }*/
+
 }
