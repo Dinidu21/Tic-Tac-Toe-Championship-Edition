@@ -9,6 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BoardController implements BoardUI {
     public static final String EASY = "Easy";
     public static final String HARD = "Hard";
@@ -32,6 +36,10 @@ public class BoardController implements BoardUI {
     private Piece currentPlayerPiece;
     private boolean isGameOver = false;
     private String currentDifficulty;
+    private int humanPlayerScore = 0;
+    private int aiPlayerScore = 0;
+    private int tiesCount = 0;
+    private String winnerName;
 
     @FXML
     public void initialize() {
@@ -142,6 +150,7 @@ public class BoardController implements BoardUI {
             playagainbtn.setDisable(false);
             // Determine the game result tie
             if (winner.getWinningPiece() == Piece.EMPTY) {
+                tiesCount++; // Increment ties count
                 statusMessage.setText("It's a tie!");
                 disableAllButtons();
                 playagainbtn.setDisable(false);  // Enable Play Again button after tie
@@ -153,13 +162,44 @@ public class BoardController implements BoardUI {
     public void notifyWinner() {
         Winner winner = board.checkWinner();
         if (winner != null) {
-            String winnerName = (winner.getWinningPiece() == humanPlayer.getSelectedPiece())
+            winnerName = (winner.getWinningPiece() == humanPlayer.getSelectedPiece())
                     ? humanPlayer.getName() : "AI";
+
+            // Update scores
+            if (winner.getWinningPiece() == humanPlayer.getSelectedPiece()) {
+                humanPlayerScore++;
+            } else if (winner.getWinningPiece() == aiPlayer.getSelectedPiece()) {
+                aiPlayerScore++;
+            }
+            saveScores(); // Save scores after updating them
+
             statusMessage.setText(winnerName + " wins!");
             disableAllButtons();
             difficultyBox.setDisable(true);
             isGameOver = true;
-            playagainbtn.setDisable(false);  // Enable Play Again button after game over
+            playagainbtn.setDisable(false);
+        }
+    }
+
+    private void saveScores() {
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<html><head><link rel='stylesheet' type='text/css' href='/styles/score.css'></head><body>")
+                .append("<div class='container'>")
+                .append("<h1>Tic Tac Toe Scores</h1>")
+                .append("<p class='score'>Human Player (").append(humanPlayer.getName()).append("): <span class='winner'>").append(humanPlayerScore).append("</span></p>")
+                .append("<p class='score'>AI Player: ").append(aiPlayerScore).append("</p>")
+                .append("<p class='tie'>Ties: ").append(tiesCount).append("</p>")
+                .append("<p class='difficulty ").append(currentDifficulty.equals("Hard") ? "hard" : "").append("'>Current Difficulty: ").append(currentDifficulty).append("</p>")
+                .append("<a href='#' class='button'>Play Again</a>")
+                .append("</div>")
+                .append("<div class='footer'>")
+                .append("</body></html>");
+
+        String SCORE_FILE = "scores.html";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SCORE_FILE))) {
+            writer.write(htmlContent.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
