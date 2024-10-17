@@ -222,19 +222,12 @@ public class BoardController implements BoardUI {
     }
 
     private void makeHardAIMove() {
-        System.out.println("1 . Hard move method ekata awa");
         int[] bestMove = aiPlayer.findBestMove(board);
-        System.out.println(Arrays.toString(bestMove) + " Best Move array eka board UI eke update wenna kalin");
-        if (board.isLegalMove(bestMove[0], bestMove[1])){
-            update(bestMove[0], bestMove[1], false);
-            System.out.println(Arrays.toString(bestMove)+ " Best Move array eka board Ui eke update wela iwarai");
-            System.out.println("===========================");
-            board.updateMove(bestMove[1],bestMove[0],aiPlayer.getSelectedPiece());
-            System.out.println("dn best move eka board terminal board eke update wenn one");
-        }else {
-            System.out.println("Best Move eka danna ba eka already filled");
+        if (board.isLegalMove(bestMove[0], bestMove[1])) {
+            board.updateMove(bestMove[0], bestMove[1], aiPlayer.getSelectedPiece());
+            update(bestMove[1], bestMove[0], false);
+        } else {
+            System.out.println("Best Move is already filled");
         }
-
-
     }
 }
