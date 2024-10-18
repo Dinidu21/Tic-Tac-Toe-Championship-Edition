@@ -20,6 +20,7 @@ public class Main extends Application {
         stage.setTitle("Tic-Tac-Toe Championship Edition");
         Image image = new Image(getClass().getResourceAsStream("/icons/game.png"));
         stage.getIcons().add(image);
+        stage.resizableProperty().setValue(false);
         stage.setScene(scene);
         stage.show();
     }
