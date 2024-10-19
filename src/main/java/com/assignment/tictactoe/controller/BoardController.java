@@ -193,42 +193,15 @@ public class BoardController implements BoardUI {
         }
     }
 
-    private void saveScores() {
-        StringBuilder htmlContent = new StringBuilder();
-        htmlContent.append("<html><head><link rel='stylesheet' type='text/css' href='/styles/score.css'></head><body>")
-                .append("<div class='container'>")
-                .append("<h1>Tic Tac Toe Scores</h1>")
-                .append("<p class='score'>Human Player (").append(humanPlayer.getName()).append("): <span class='winner'>").append(humanPlayerScore).append("</span></p>")
-                .append("<p class='score'>AI Player: ").append(aiPlayerScore).append("</p>")
-                .append("<p class='tie'>Ties: ").append(tiesCount).append("</p>")
-                .append("<p class='difficulty ").append(currentDifficulty.equals("Hard") ? "hard" : "").append("'>Current Difficulty: ").append(currentDifficulty).append("</p>")
-                .append("<a href='#' class='button'>Play Again</a>")
-                .append("</div>")
-                .append("<div class='footer'>")
-                .append("</body></html>");
-
-        String SCORE_FILE = "scores.html";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SCORE_FILE))) {
-            writer.write(htmlContent.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void update(int col, int row, boolean isHuman) {
-        Button button = gameButtons[row][col];
-        Piece piece = isHuman ? humanPlayer.getSelectedPiece() : aiPlayer.getSelectedPiece();
-        button.setText(piece.toString());  // Update the button with the current player's piece (X or O)
-        button.setDisable(true);  // Disable the button after it's been clicked
-
-    }
-
     private void playAgain(ActionEvent event) {
         resetGame(); // Reset the game when Play Again is pressed
+        // Re-enable piece selection, difficulty selection, and name input
         difficultyBox.setDisable(false);
-        startGameButton.setDisable(true);
-        pieceSelection.setDisable(true);
+        pieceSelection.setDisable(false);
+        playerNameField.setDisable(false);
+        startGameButton.setDisable(false); // Enable the start button so the user can start a new game
+        playagainbtn.setDisable(true);  // Disable Play Again button until game is over again
+
     }
 
     private void resetGame() {
@@ -243,7 +216,13 @@ public class BoardController implements BoardUI {
                 button.setDisable(false); // Re-enable the button
             }
         }
-        statusMessage.setText(humanPlayer.getName() + " vs AI - Game Restarted!");
+
+        // Reset the status message to guide the user for the next steps
+        statusMessage.setText("Select piece & difficulty,'Start' to begin!");
+
+        // Reset or clear player scores if needed (optional)
+         humanPlayerScore = 0;
+         aiPlayerScore = 0;
     }
 
     private void disableAllButtons() {
@@ -288,5 +267,36 @@ public class BoardController implements BoardUI {
         } else {
             System.out.println("Best Move is already filled");
         }
+    }
+
+    private void saveScores() {
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<html><head><link rel='stylesheet' type='text/css' href='/styles/score.css'></head><body>")
+                .append("<div class='container'>")
+                .append("<h1>Tic Tac Toe Scores</h1>")
+                .append("<p class='score'>Human Player (").append(humanPlayer.getName()).append("): <span class='winner'>").append(humanPlayerScore).append("</span></p>")
+                .append("<p class='score'>AI Player: ").append(aiPlayerScore).append("</p>")
+                .append("<p class='tie'>Ties: ").append(tiesCount).append("</p>")
+                .append("<p class='difficulty ").append(currentDifficulty.equals("Hard") ? "hard" : "").append("'>Current Difficulty: ").append(currentDifficulty).append("</p>")
+                .append("<a href='#' class='button'>Play Again</a>")
+                .append("</div>")
+                .append("<div class='footer'>")
+                .append("</body></html>");
+
+        String SCORE_FILE = "scores.html";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SCORE_FILE))) {
+            writer.write(htmlContent.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(int col, int row, boolean isHuman) {
+        Button button = gameButtons[row][col];
+        Piece piece = isHuman ? humanPlayer.getSelectedPiece() : aiPlayer.getSelectedPiece();
+        button.setText(piece.toString());  // Update the button with the current player's piece (X or O)
+        button.setDisable(true);  // Disable the button after it's been clicked
+
     }
 }
