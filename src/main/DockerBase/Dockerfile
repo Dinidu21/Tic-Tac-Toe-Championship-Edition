@@ -1,21 +1,15 @@
-# Use a base image with JDK
-FROM openjdk:21-jdk-slim
-
-# Set the working directory
+# Build stage
+FROM maven:3.9.6-eclipse-temurin-21 as build
 WORKDIR /app
-
-# Copy the pom.xml and source code into the container
 COPY pom.xml .
+RUN mvn dependency:go-offline
 COPY src ./src
-
-# Install Maven
-RUN apt-get update && \
-    apt-get install -y maven && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Package the application
 RUN mvn clean package
 
-# Set the command to run the application
-CMD ["java", "-jar", "target/Tic-Tac-ToeChampionshipEdition-1.0-SNAPSHOT.jar"]
+# Run stage
+FROM eclipse-temurin:21-jdk-jammy
+WORKDIR /app
+COPY --from=build /app/target/Tic-Tac-ToeChampionshipEdition-1.0-SNAPSHOT.jar ./app.jar
+
+# Run the application
+CMD ["java", "-jar", "app.jar"]
