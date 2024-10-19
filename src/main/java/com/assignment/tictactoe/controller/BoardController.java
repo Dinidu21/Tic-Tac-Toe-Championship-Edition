@@ -145,15 +145,17 @@ public class BoardController implements BoardUI {
         Winner winner = board.checkWinner();
         if (winner != null) {
             isGameOver = true;
-            notifyWinner();
             disableAllButtons();  // Disable buttons after game ends
             playagainbtn.setDisable(false);
-            // Determine the game result tie
+
+            // Determine if it's a tie
             if (winner.getWinningPiece() == Piece.EMPTY) {
                 tiesCount++; // Increment ties count
                 statusMessage.setText("It's a tie!");
                 disableAllButtons();
                 playagainbtn.setDisable(false);  // Enable Play Again button after tie
+            } else {
+                notifyWinner();  // Only notify the winner if it's not a tie
             }
         }
     }
@@ -174,10 +176,20 @@ public class BoardController implements BoardUI {
             saveScores(); // Save scores after updating them
 
             statusMessage.setText(winnerName + " wins!");
+            updateWinningButtons(winner.getWinningPositions()); // Highlight winning buttons
             disableAllButtons();
             difficultyBox.setDisable(true);
             isGameOver = true;
             playagainbtn.setDisable(false);
+        }
+    }
+
+    private void updateWinningButtons(int[][] winningPositions) {
+        for (int[] pos : winningPositions) {
+            int row = pos[1];
+            int col = pos[0];
+            Button button = gameButtons[row][col];
+            button.setStyle("-fx-background-color: green;"); // Set background color to green
         }
     }
 
@@ -220,13 +232,14 @@ public class BoardController implements BoardUI {
     }
 
     private void resetGame() {
-        board.initializeBoard(); // Resetting the board state
+        board.initializeBoard(); // Reset the board state
         isGameOver = false; // Reset game-over state
 
-        // Clear the text of all buttons and re-enable them
+        // Clear the text and styles of all buttons and re-enable them
         for (Button[] row : gameButtons) {
             for (Button button : row) {
                 button.setText(""); // Clear the button text
+                button.setStyle(""); // Reset the background to default
                 button.setDisable(false); // Re-enable the button
             }
         }
